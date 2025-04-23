@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//this is the DB context
 using System.Data.SqlClient;
 
 namespace bookManagment
 {
     public class BookDB
     {
+        //connection string that is passed in main
         private readonly string _connectionString;
 
         public BookDB(string connectionString)
@@ -13,6 +13,7 @@ namespace bookManagment
             _connectionString = connectionString;
         }
 
+        //function to add book
         public void AddBook(Book book)
         {
             const string query = @"INSERT INTO Books (Title, Author, Genre, Year) VALUES (@title, @author, @genre, @year)";
@@ -28,6 +29,7 @@ namespace bookManagment
             }
         }
 
+        //function to re all books
         public void RemoveAllBooks()
         {
             const string query = "DELETE FROM Books";
@@ -39,7 +41,7 @@ namespace bookManagment
                 Console.WriteLine($"{rowsAffected} book(s) removed from the database.");
             }
         }
-
+        //function to rebook
         public void RemoveBook(int id)
         {
             const string query = "DELETE FROM Books WHERE Id = @id";
@@ -59,6 +61,7 @@ namespace bookManagment
                 }
             }
         }
+        //function to update book
         public void UpdateBook(Book book)
         {
             const string query = @"UPDATE Books
@@ -89,6 +92,7 @@ namespace bookManagment
             }
         }
 
+        //function that returns list of all books
         public List<Book> GetAllBooks()
         {
             var books = new List<Book>();
@@ -112,7 +116,5 @@ namespace bookManagment
             }
             return books;
         }
-
-        // TODO: Implement UpdateBook, RemoveBook, RemoveAllBooks methods
     }
 }
